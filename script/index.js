@@ -89,6 +89,10 @@ minus.addEventListener('click', ()=>
   {
     input.value = '0';
   }
+  else if (history.textContent.includes('='))
+  {
+    history.textContent = input.value + '-';
+  }
   else if (history.textContent == '' && input.value !== '0' && input.value !== '-')
   {
     history.textContent += input.value + '-';
@@ -122,6 +126,10 @@ plus.addEventListener('click', ()=>
   {
     input.value = '0';
   }
+  else if (history.textContent.includes('='))
+  {
+    history.textContent = input.value + '+';
+  }
   else if (history.textContent == '' && input.value !== '0' && input.value !== '-')
   {
     history.textContent += input.value + '+';
@@ -136,7 +144,6 @@ plus.addEventListener('click', ()=>
     let operator_char = history.textContent.charAt(history.textContent.length - 1);
     history.textContent = history.textContent.replace(operator_char, '+');
   }
-  
   else
   {
     calculete();
@@ -148,7 +155,7 @@ equals.addEventListener('click', ()=>{
   if (history.textContent !== '' || input.value !== '0')
   {
     // get operator index
-    let operator_index = history.textContent.length - 1
+    let operator_index = history.textContent.length - 1;
     let operator = history.textContent.charAt(operator_index);
     if (operator == '+' || '-')
     {
@@ -159,7 +166,7 @@ equals.addEventListener('click', ()=>{
 
 function calculete_for_equals()
 {
-  let perform = history.textContent += input.value
+  let perform = history.textContent + input.value;
   if (perform.includes('+'))
   {
     let operator = perform.indexOf('+');
@@ -184,7 +191,7 @@ function calculete_for_equals()
     let result = num1 + num2;
     input.value = result;
     history.textContent = num1 + '+' + num2 + '=';
-    return result
+    return result;
   }
   else if (perform.includes('-'))
   {
@@ -199,7 +206,7 @@ function calculete_for_equals()
       num1 = parseInt(num1);
     }
     let num2 = perform.slice(operator + 1);
-    if (num2.includes('.') || num1.includes('.'))
+    if (num2.includes('.') && num1.includes('.'))
     {
       num2 = parseFloat(num2);
     }
@@ -210,7 +217,7 @@ function calculete_for_equals()
     let result = num1 - num2;
     input.value = result;
     history.textContent = num1 + '-' + num2 + '=';
-    return result
+    return result;
   }
 }
 
@@ -275,7 +282,14 @@ document.addEventListener('keypress', (event) => {
   let keyName = event.key;
   if (numbers_allowed.includes(keyName))
   {
-    input.value += keyName;
+    if(input.value == '0')
+    {
+      input.value = event.key;
+    }
+    else
+    {
+      input.value += event.key;
+    }
   }
   if (operators_allowed.includes(keyName))
   {
