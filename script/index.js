@@ -10,6 +10,8 @@ let minus = document.querySelector('.btn__minus');
 let del = document.querySelector('.btn__del');
 let sign = document.querySelector('.btn__sign');
 let period = document.querySelector('.btn__period');
+let multiplication = document.querySelector('.btn__x');
+let division = document.querySelector('.btn__division');
 
 // Period
 period.addEventListener('click', () => {
@@ -79,6 +81,78 @@ del.addEventListener('click', () => {
   if (input.value == '')
   {
     input.value = 0;
+  }
+})
+
+// division
+division.addEventListener('click', ()=>
+{
+  if (input.value == '0')
+  {
+    input.value = '0';
+  }
+  else if (history.textContent.includes('='))
+  {
+    history.textContent = input.value + '/';
+  }
+  else if (history.textContent == '' && input.value !== '0' && input.value !== '/')
+  {
+    history.textContent += input.value + '/';
+    input.value = '0';
+  }
+  else if ((input.value == '0' || '/') && (history.textContent == ''))
+  {
+    // input.value = minus.textContent;
+  }
+  else if (history.textContent.slice(0, -1) == input.value)
+  {
+    let operator_char = history.textContent.charAt(history.textContent.length - 1);
+    history.textContent = history.textContent.replace(operator_char, '/');
+  }
+  else if (history.textContent.slice(0, -1) == input.value)
+  {
+    let operator_char = history.textContent.charAt(history.textContent.length - 1);
+    history.textContent = history.textContent.replace(operator_char, '/');
+  }
+  else
+  {
+    calculete();
+  }
+})
+
+// multiplication
+multiplication.addEventListener('click', ()=>
+{
+  if (input.value == '0')
+  {
+    input.value = '0';
+  }
+  else if (history.textContent.includes('='))
+  {
+    history.textContent = input.value + '*';
+  }
+  else if (history.textContent == '' && input.value !== '0' && input.value !== '*')
+  {
+    history.textContent += input.value + '*';
+    input.value = '0';
+  }
+  else if ((input.value == '0' || '*') && (history.textContent == ''))
+  {
+    // input.value = minus.textContent;
+  }
+  else if (history.textContent.slice(0, -1) == input.value)
+  {
+    let operator_char = history.textContent.charAt(history.textContent.length - 1);
+    history.textContent = history.textContent.replace(operator_char, '*');
+  }
+  else if (history.textContent.slice(0, -1) == input.value)
+  {
+    let operator_char = history.textContent.charAt(history.textContent.length - 1);
+    history.textContent = history.textContent.replace(operator_char, '*');
+  }
+  else
+  {
+    calculete();
   }
 })
 
@@ -180,7 +254,7 @@ function calculete_for_equals()
       num1 = parseInt(num1);
     }
     let num2 = perform.slice(operator + 1);
-    if (num2.includes('.') && num1.includes('.'))
+    if (num2.includes('.'))
     {
       num2 = parseFloat(num2);
     }
@@ -206,7 +280,7 @@ function calculete_for_equals()
       num1 = parseInt(num1);
     }
     let num2 = perform.slice(operator + 1);
-    if (num2.includes('.') && num1.includes('.'))
+    if (num2.includes('.'))
     {
       num2 = parseFloat(num2);
     }
@@ -217,6 +291,58 @@ function calculete_for_equals()
     let result = num1 - num2;
     input.value = result;
     history.textContent = num1 + '-' + num2 + '=';
+    return result;
+  }
+  else if (perform.includes('*'))
+  {
+    let operator = perform.indexOf('*');
+    let num1 = perform.slice(0, operator);
+    if (num1.includes('.'))
+    {
+      num1 = parseFloat(num1);
+    }
+    else
+    {
+      num1 = parseInt(num1);
+    }
+    let num2 = perform.slice(operator + 1);
+    if (num2.includes('.'))
+    {
+      num2 = parseFloat(num2);
+    }
+    else
+    {
+      num2 = parseInt(num2);
+    }
+    let result = num1 * num2;
+    input.value = result;
+    history.textContent = num1 + '*' + num2 + '=';
+    return result;
+  }
+  else if (perform.includes('/'))
+  {
+    let operator = perform.indexOf('/');
+    let num1 = perform.slice(0, operator);
+    if (num1.includes('.'))
+    {
+      num1 = parseFloat(num1);
+    }
+    else
+    {
+      num1 = parseInt(num1);
+    }
+    let num2 = perform.slice(operator + 1);
+    if (num2.includes('.'))
+    {
+      num2 = parseFloat(num2);
+    }
+    else
+    {
+      num2 = parseInt(num2);
+    }
+    let result = num1 / num2;
+    input.value = result;
+    history.textContent = num1 + '/' + num2 + '=';
     return result;
   }
 }
@@ -236,7 +362,7 @@ function calculete() {
       num1 = parseInt(num1);
     }
     let num2 = perform.slice(operator + 1);
-    if (num2.includes('.') && num1.includes('.'))
+    if (num2.includes('.'))
     {
       num2 = parseFloat(num2);
     }
@@ -262,7 +388,7 @@ function calculete() {
       num1 = parseInt(num1);
     }
     let num2 = perform.slice(operator + 1);
-    if (num2.includes('.') || num1.includes('.'))
+    if (num2.includes('.'))
     {
       num2 = parseFloat(num2);
     }
@@ -274,6 +400,58 @@ function calculete() {
     input.value = result;
     history.textContent = result + '-';
     return result
+  }
+  else if (perform.includes('*'))
+  {
+    let operator = perform.indexOf('*');
+    let num1 = perform.slice(0, operator);
+    if (num1.includes('.'))
+    {
+      num1 = parseFloat(num1);
+    }
+    else
+    {
+      num1 = parseInt(num1);
+    }
+    let num2 = perform.slice(operator + 1);
+    if (num2.includes('.'))
+    {
+      num2 = parseFloat(num2);
+    }
+    else
+    {
+      num2 = parseInt(num2);
+    }
+    let result = num1 * num2;
+    input.value = result;
+    history.textContent = num1 + '*' + num2 + '=';
+    return result;
+  }
+  else if (perform.includes('/'))
+  {
+    let operator = perform.indexOf('/');
+    let num1 = perform.slice(0, operator);
+    if (num1.includes('.'))
+    {
+      num1 = parseFloat(num1);
+    }
+    else
+    {
+      num1 = parseInt(num1);
+    }
+    let num2 = perform.slice(operator + 1);
+    if (num2.includes('.'))
+    {
+      num2 = parseFloat(num2);
+    }
+    else
+    {
+      num2 = parseInt(num2);
+    }
+    let result = num1 / num2;
+    input.value = result;
+    history.textContent = num1 + '/' + num2 + '=';
+    return result;
   }
 }
 
@@ -296,8 +474,6 @@ document.addEventListener('keypress', (event) => {
     keyName == 'Enter' ? keyName = '=' : keyName = keyName;
 
   }
-    // alert(event.code);
-  // let code = event.code;
 })
 
   const numbers_allowed = ['0', '1', '2', '3', '4', '5', 
