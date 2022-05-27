@@ -1,0 +1,8 @@
+.calculator {
+  margin: 5% auto;
+  box-shadow: 0 0 3em rgba(8, 210, 183, 0.804);
+  width: min-content;
+  background-color: rgba(165, 244, 233, 0.804);
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+}

@@ -1,7 +1,7 @@
 let clear_all = document.querySelector('.btn__CE');
-let input = document.querySelector('.input');
+let input = document.querySelector('.calculator__input');
 let btn = document.getElementsByClassName('buttons__el');
-let history = document.querySelector('.history');
+let history = document.querySelector('.calculator__history');
 let clear_input = document.querySelector('.btn__C');
 let equals = document.querySelector('.btn__equals');
 

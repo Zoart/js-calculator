@@ -1,0 +1,7 @@
+.numbers {
+  background-color: rgba(126, 254, 237, 0.505);
+}
+
+.numbers:hover {
+  background-color: rgba(61, 252, 226, 0.699);
+}
